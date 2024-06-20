@@ -13,7 +13,7 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        node-version: [18.x]  # You can add more versions here (e.g., 14.x, 18.x)
+        node-version: [16.x]  # You can add more versions here (e.g., 14.x, 18.x)
     steps:
       - uses: actions/checkout@v4
       - name: Use Node.js ${{ matrix.node-version }}
@@ -21,9 +21,9 @@ jobs:
         with:
           node-version: ${{ matrix.node-version }}
           cache: 'npm'
-      - name: npm install
-        run: npm install
-      - name: npm build
-        run: npm run build
+      - name: yarn install
+        run: yarn install
+      - name: yarn build
+        run: yarn build
       - name: Run Tests
-        run: npm run test
+        run: yarn test  # Assuming your test script is 'yarn test'
