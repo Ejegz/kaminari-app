@@ -1,54 +1,29 @@
-# Sample workflow for building and deploying a Next.js site to GitHub Pages
-#
-# To get started with Next.js see: https://nextjs.org/docs/getting-started
-#
 name: CI for Next.js site
 
 on:
-  # Runs on pushes targeting the default branch
+  # Runs on pushes targeting the main branch
   push:
     branches: ["main"]
 
   # Allows you to run this workflow manually from the Actions tab
   workflow_dispatch:
 
-# Sets permissions of the GITHUB_TOKEN to allow deployment to GitHub Pages
-#permissions:
-#  contents: read
-#  pages: write
-#  id-token: write
-
-# Allow only one concurrent deployment, skipping runs queued between the run in-progress and latest queued.
-# However, do NOT cancel in-progress runs as we want to allow these production deployments to complete.
-#concurrency:
-#  group: "pages"
-#  cancel-in-progress: false
-
 jobs:
-  # Build job
-  build:
+  build-and-test:
     runs-on: ubuntu-latest
-      steps:
-    - uses: actions/checkout@v3
-    - name: Use Node.js ${{ matrix.node-version }}
-      uses: actions/setup-node@v3
-      with:
-        node-version: ${{ matrix.node-version }}
-        cache: 'npm'
-    - name: git pull
-      run: git pull origin develop
-
-    
+    strategy:
+      matrix:
+        node-version: [18.x]  # You can add more versions here (e.g., 14.x, 18.x)
     steps:
-      - name: Checkout
-        uses: actions/checkout@v4
-      
+      - uses: actions/checkout@v4
+      - name: Use Node.js ${{ matrix.node-version }}
+        uses: actions/setup-node@v3
+        with:
+          node-version: ${{ matrix.node-version }}
+          cache: 'npm'
       - name: npm install
         run: npm install
-
-      - name: npm install
-        run: npm install     
- 
-      - name: 'Run Tests'
+      - name: npm build
+        run: npm run build
+      - name: Run Tests
         run: npm run test
- 
