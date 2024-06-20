@@ -23,6 +23,8 @@ jobs:
           cache: 'npm'
       - name: yarn install
         run: yarn install
+      - name: yarn Lint
+        run: yarn lint
       - name: yarn build
         run: yarn build
       - name: Run Tests
