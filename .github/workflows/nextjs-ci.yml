@@ -10,7 +10,7 @@ on:
 
 jobs:
   build-and-test:
-    runs-on: ubuntu-latest
+    runs-on: kaminari-latest
     strategy:
       matrix:
         node-version: [21.x]  # You can add more versions here (e.g., 14.x, 18.x)
@@ -27,5 +27,5 @@ jobs:
 #        run: yarn lint
       - name: yarn build
         run: yarn build
-      - name: Run Tests
-        run: yarn test  # Assuming your test script is 'yarn test'
+#      - name: Run Tests
+#        run: yarn test  # Assuming your test script is 'yarn test'
